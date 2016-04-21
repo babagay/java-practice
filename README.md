@@ -1,2 +1,2 @@
 # java-practice
-Java cource at Source IT
+Java course at Source IT
