@@ -1,14 +1,148 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>social</groupId>
+  <artifactId>pet</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>pet Maven Webapp</name>
+  <url>http://maven.apache.org</url>
 
-    <groupId>social</groupId>
-    <artifactId>social-pet</artifactId>
-    <version>1.0-SNAPSHOT</version>
+  <properties>
+    <junitVersion>4.12</junitVersion>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
-    <packaging>war</packaging>
-    <name>Social</name>
+  <dependencies>
+    <!--<dependency>-->
+      <!--<groupId>junit</groupId>-->
+      <!--<artifactId>junit</artifactId>-->
+      <!--<version>${junitVersion}</version>-->
+      <!--<scope>test</scope>-->
+    <!--</dependency>-->
+
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <version>4.0.0-b01</version>
+          <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+          <version>1.1.7</version>
+      </dependency>
+
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>jstl</artifactId>
+          <version>1.2</version>
+      </dependency>
+
+      <!--<dependency>-->
+      <!--<groupId>org.mortbay.jetty</groupId>-->
+      <!--<artifactId>jetty-util</artifactId>-->
+      <!--<version>6.1.25</version>-->
+    <!--</dependency>-->
+  </dependencies>
+
+  <build>
+    <finalName>pet</finalName>
+
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <configuration>
+                  <source>1.8</source>
+                  <target>1.8</target>
+                  <showWarnings>true</showWarnings>
+                  <showDeprecation>true</showDeprecation>
+                  <debug>true</debug>
+              </configuration>
+          </plugin>
+
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-war-plugin</artifactId>
+              <version>2.6</version>
+              <configuration>
+                  <webappDirectory>src/main/webapp</webappDirectory>
+                  <failOnMissingWebXml>false</failOnMissingWebXml>
+              </configuration>
+          </plugin>
+
+          <plugin>
+              <artifactId>maven-dependency-plugin</artifactId>
+              <version>2.1</version>
+          </plugin>
+
+          <plugin>
+              <artifactId>maven-antrun-plugin</artifactId>
+              <version>1.8</version>
+              <executions>
+                  <!--clean-->
+                  <execution>
+                      <id>clean-lib</id>
+                      <phase>clean</phase>
+                      <configuration>
+                          <tasks>
+                              <delete dir="${basedir}/src/main/webapp/WEB_INF/lib" />
+                          </tasks>
+                      </configuration>
+                      <goals>
+                          <goal>run</goal>
+                      </goals>
+                  </execution>
+                  <!--build-->
+                  <!--<execution>-->
+                      <!--<id>copy-lib</id>-->
+                      <!--<phase>package</phase>-->
+                      <!--<configuration>-->
+                          <!--<tasks>-->
+                              <!--<delete dir="${basedir}/src/main/webapp/WEB_INF/lib" />-->
+                              <!--<copy todir="${basedir}/src/main/webapp/WEB_INF/lib">-->
+                                  <!--<fileset dir="${basedir}/target/${project.build.finalName}/WEB-INF/lib" />-->
+                              <!--</copy>-->
+                          <!--</tasks>-->
+                      <!--</configuration>-->
+                      <!--<goals>-->
+                          <!--<goal>run</goal>-->
+                      <!--</goals>-->
+                  <!--</execution>-->
+              </executions>
+          </plugin>
+
+          <plugin>
+
+              <!--http://wiki.eclipse.org/Jetty/Feature/Jetty_Maven_Plugin#Quick_Start:_Get_Up_and_Running-->
+              <groupId>org.eclipse.jetty</groupId>
+              <!--<groupId>org.mortbay.jetty</groupId>-->
+              <artifactId>jetty-maven-plugin</artifactId>
+              <version>9.2.16.v20160414</version>
+              <configuration>
+                  <scanIntervalSeconds>10</scanIntervalSeconds>
+                  <!--<webApp>-->
+                      <!--<contextPath>/abc</contextPath>-->
+                  <!--</webApp>-->
+                  <httpConnector>
+                      <port>8888</port>
+                  </httpConnector>
+                  <stopPort>9966</stopPort>
+                  <stopKey>foo</stopKey>
+              </configuration>
+          </plugin>
+      </plugins>
+
+      <pluginManagement>
+
+      </pluginManagement>
+  </build>
+
+
+
 
 </project>
+<!--http://maven.apache.org/pom.html-->
+<!--https://habrahabr.ru/post/126966/-->
