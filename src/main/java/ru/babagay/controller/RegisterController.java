@@ -2,8 +2,7 @@ package ru.babagay.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import ru.babagay.social.service.NameService;
+import redis.clients.jedis.Jedis;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+//import redis.clients.jedis.Jedis;
 
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
@@ -28,6 +31,65 @@ public class RegisterController extends HttpServlet {
 
     private Connection conn = null;
     private Statement stmt = null;
+
+    public static void main(String[] args) {
+
+        /**
+         * @see http://www.tutorialspoint.com/redis/redis_java.htm
+         */
+
+        /*
+        // Piece 1
+        //Connecting to Redis server on localhost
+        Jedis jedis = new Jedis("localhost");
+        System.out.println("Connection to server sucessfully");
+        //check whether server is running or not
+        System.out.println("Server is running: "+jedis.ping());
+        */
+
+        /*
+        // Piece 2
+        //Connecting to Redis server on localhost
+        Jedis jedis = new Jedis("localhost");
+        System.out.println("Connection to server sucessfully");
+        //set the data in redis string
+        jedis.set("tutorial-name", "Redis tutorial 138");
+        // Get the stored data and print it
+        System.out.println("Stored string in redis:: "+ jedis.get("tutorial-name"));
+        */
+
+        /*
+        // Piece 3 - List Example
+        //Connecting to Redis server on localhost
+        Jedis jedis = new Jedis("localhost");
+        System.out.println("Connection to server sucessfully");
+        //store data in redis list
+        jedis.lpush("tutorial-list", "Redis");
+        jedis.lpush("tutorial-list", "Mongodb");
+        jedis.lpush("tutorial-list", "Mysql");
+        // Get the stored data and print it
+        List<String> list = jedis.lrange("tutorial-list", 0 ,5);
+        for(int i=0; i<list.size(); i++) {
+            System.out.println("Stored string in redis:: "+list.get(i));
+        }
+        */
+
+        // Piece 3 - Keys Example
+        //Connecting to Redis server on localhost
+        Jedis jedis = new Jedis("localhost");
+        System.out.println("Connection to server sucessfully");
+        //store data in redis list
+
+        // Get the stored data and print it
+        Set<String> keys =  jedis.keys("*");
+        List<String> list = new ArrayList<>(keys);
+
+
+        for(int i=0; i<list.size(); i++) {
+            System.out.println("List of stored keys:: "+list.get(i));
+        }
+
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

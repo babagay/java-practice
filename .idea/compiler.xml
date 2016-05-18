@@ -26,8 +26,8 @@
         <module name="pet" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="java-practice" target="1.5" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="java-practice" target="1.8" />
       <module name="pet" target="1.8" />
     </bytecodeTargetLevel>
   </component>
