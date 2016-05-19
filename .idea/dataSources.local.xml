@@ -7,5 +7,11 @@
       <schema-pattern>social.*</schema-pattern>
       <default-schemas>social.*</default-schemas>
     </data-source>
+    <data-source name="PostgreSQL - social@localhost" uuid="92976938-2deb-471a-9ce6-91f50eced13e">
+      <secret-storage>master_key</secret-storage>
+      <user-name>postgres</user-name>
+      <schema-pattern>postgres.*</schema-pattern>
+      <default-schemas>postgres.public</default-schemas>
+    </data-source>
   </component>
 </project>
